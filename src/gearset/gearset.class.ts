@@ -24,12 +24,12 @@ export class Gearset {
         }
         // TODO Fehler beheben wenn link mitgegeben wird, response passt dann auch nicht
     };
-    setGearset = async (params: {
-        id: string;
-        name: string;
-    }): Promise<SGHGearset | undefined> => {
+    setGearset = async (
+        id: string,
+        name: string
+    ): Promise<SGHGearset | undefined> => {
         try {
-            console.log(params.id, params.name);
+            console.log(id, name);
         } catch (error: any) {
             return error;
         }
@@ -120,7 +120,6 @@ const getEtroGearset = async (id: string): Promise<EtroGearset | null> => {
     return axios
         .get(ETRO_API + `/gearsets/${id}/`)
         .then((response) => {
-            console.log(response.data, response.status);
             if (response.status === 200) {
                 const etroMateria = response.data.materia;
                 const materia: {equipId: string; materiaIds: string[]}[] = [];
@@ -144,7 +143,6 @@ const getEtroGearset = async (id: string): Promise<EtroGearset | null> => {
         })
 
         .catch((error) => {
-            console.log(error);
             return error;
         });
 };

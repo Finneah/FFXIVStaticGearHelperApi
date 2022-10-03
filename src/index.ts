@@ -23,12 +23,19 @@ app.get('/', (req, res) => {
 app.get('/getgearset/:id', async (req, res) => {
     const {id} = req.params;
     const gear = await gearset.getGearset(id);
+
+    res.send(gear);
+});
+// http://localhost:3001/getgearset/bd287613-ca59-45b7-b50d-5465daca9ccc/namentest
+app.get('/getgearset/:id/:name', async (req, res) => {
+    const {id} = req.params;
+    const gear = await gearset.getGearset(id);
     res.send(gear);
 });
 
 // http://localhost:3001/setgearset/bd287613-ca59-45b7-b50d-5465daca9ccc/namentest
 app.get('/setgearset/:id/:name', async (req, res) => {
-    const saved = await gearset.setGearset(req.params);
+    const {id, name} = req.params;
     res.send(req.params);
 });
 
