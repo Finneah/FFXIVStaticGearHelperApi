@@ -1,8 +1,5 @@
-import {
-    EtroEquipment,
-    SGHEquipment,
-    SlotNames
-} from '../getGearset/gearset.types';
+import {EtroEquipment} from '../types/etro.types';
+import {SGHEquipment, SlotNames} from '../types/gearset.types';
 
 export const getEquipmentTypeByString = (
     enumValue: string
@@ -72,7 +69,7 @@ export const mapMateria = (
         return sghEquip;
     }
 
-    const equipMateria = etroMateria.find(
+    const equipMateria = etroMateria?.find(
         (e) =>
             e.equipId.replace('R', '').replace('L', '') ===
             sghEquip.id.toString()

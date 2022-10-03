@@ -1,23 +1,19 @@
-import {
-    EtroEquipment,
-    EtroFood,
-    EtroGearset,
-    SGHGearset,
-    SlotNames
-} from './gearset.types';
+import {SGHGearset, SlotNames} from '../types/gearset.types';
 import axios from 'axios';
 import {mapEquip, mapFingerEquip, mapMateria} from '../utils/utils';
-
-const ETRO_API = 'https://etro.gg/api';
+import {ETRO_API} from '../config';
+import {EtroGearset, EtroEquipment, EtroFood} from '../types/etro.types';
 
 export class Gearset {
     getGearset = async (id: string): Promise<SGHGearset | undefined> => {
         try {
             const etroGearset = await getEtroGearset(id);
+
             if (!etroGearset) {
                 return undefined;
             }
             let sghGearset = await getBasicGearset(etroGearset);
+
             const etroMateria = etroGearset.materia;
 
             sghGearset = await getGearSetWithMateria(sghGearset, etroMateria);
@@ -28,7 +24,18 @@ export class Gearset {
         }
         // TODO Fehler beheben wenn link mitgegeben wird, response passt dann auch nicht
     };
+    setGearset = async (params: {
+        id: string;
+        name: string;
+    }): Promise<SGHGearset | undefined> => {
+        try {
+            console.log(params.id, params.name);
+        } catch (error: any) {
+            return error;
+        }
+    };
 }
+
 const getBasicGearset = async (
     etroGearset: EtroGearset
 ): Promise<SGHGearset> => {
@@ -83,7 +90,6 @@ const getGearSetWithMateria = async (
     sghGearset: SGHGearset,
     etroMateria: {equipId: string; materiaIds: string[]}[]
 ): Promise<SGHGearset> => {
-    // http://localhost:3001/gearset/cc743560-11c4-4fe3-89fd-64534cfa50ca
     try {
         const materiaList = await getEtroMateriaList();
 
@@ -110,9 +116,11 @@ const getGearSetWithMateria = async (
 };
 
 const getEtroGearset = async (id: string): Promise<EtroGearset | null> => {
+    // https://etro.gg/api/gearsets/bd287613-ca59-45b7-b50d-5465daca9ccc
     return axios
         .get(ETRO_API + `/gearsets/${id}/`)
         .then((response) => {
+            console.log(response.data, response.status);
             if (response.status === 200) {
                 const etroMateria = response.data.materia;
                 const materia: {equipId: string; materiaIds: string[]}[] = [];
@@ -136,6 +144,7 @@ const getEtroGearset = async (id: string): Promise<EtroGearset | null> => {
         })
 
         .catch((error) => {
+            console.log(error);
             return error;
         });
 };

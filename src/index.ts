@@ -1,8 +1,10 @@
 import express from 'express';
 import path from 'path';
-import {Gearset} from './getGearset/gearset.class';
+import {Gearset} from './gearset/gearset.class';
+import {Jobs} from './jobList/jobList.class';
 
 const gearset = new Gearset();
+const joblist = new Jobs();
 const port = 3001;
 const hostname = 'localhost';
 const app = express();
@@ -17,9 +19,22 @@ app.get('/', (req, res) => {
     res.send(req.query.search);
 });
 
-app.get('/gearset/:id', async (req, res) => {
+// http://localhost:3001/getgearset/bd287613-ca59-45b7-b50d-5465daca9ccc
+app.get('/getgearset/:id', async (req, res) => {
     const {id} = req.params;
     const gear = await gearset.getGearset(id);
-
     res.send(gear);
+});
+
+// http://localhost:3001/setgearset/bd287613-ca59-45b7-b50d-5465daca9ccc/namentest
+app.get('/setgearset/:id/:name', async (req, res) => {
+    const saved = await gearset.setGearset(req.params);
+    res.send(req.params);
+});
+
+// http://localhost:3001/jobs/
+app.get('/jobs/', async (req, res) => {
+    const jobs = await joblist.getJobs();
+
+    res.send(jobs);
 });

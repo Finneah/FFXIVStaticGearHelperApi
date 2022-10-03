@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.gearsetMock = exports.etroGearsetMock = exports.etroMateriaListMock = void 0;
 // https://etro.gg/api/materia
-exports.etroMateriaListMock = [
+export const etroMateriaListMock = [
     {
         id: 16,
         param: 44,
@@ -100,7 +97,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18020,
             name: 'Savage Might Materia VI',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20267,
@@ -136,7 +134,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26730,
             name: 'Savage Might Materia VIII',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20279,
@@ -172,7 +171,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33933,
             name: 'Savage Might Materia X',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20289,
@@ -285,7 +285,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18022,
             name: "Gatherer's Guerdon Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20266,
@@ -321,7 +322,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26732,
             name: "Gatherer's Guerdon Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20277,
@@ -357,7 +359,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33935,
             name: "Gatherer's Guerdon Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20288,
@@ -470,7 +473,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18023,
             name: "Gatherer's Guile Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20266,
@@ -506,7 +510,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26733,
             name: "Gatherer's Guile Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20277,
@@ -542,7 +547,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33936,
             name: "Gatherer's Guile Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20288,
@@ -655,7 +661,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18011,
             name: 'Piety Materia VI',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20262,
@@ -691,7 +698,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26727,
             name: 'Piety Materia VIII',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20278,
@@ -727,7 +735,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33930,
             name: 'Piety Materia X',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20286,
@@ -840,7 +849,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18024,
             name: "Gatherer's Grasp Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20266,
@@ -876,7 +886,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26734,
             name: "Gatherer's Grasp Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20277,
@@ -912,7 +923,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33937,
             name: "Gatherer's Grasp Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20288,
@@ -1025,7 +1037,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18029,
             name: 'Quicktongue Materia VI',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20265,
@@ -1061,7 +1074,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26739,
             name: 'Quicktongue Materia VIII',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20280,
@@ -1097,7 +1111,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33942,
             name: 'Quicktongue Materia X',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20287,
@@ -1210,7 +1225,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18027,
             name: "Craftsman's Command Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20270,
@@ -1246,7 +1262,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26737,
             name: "Craftsman's Command Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20276,
@@ -1282,7 +1299,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33940,
             name: "Craftsman's Command Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20290,
@@ -1395,7 +1413,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18025,
             name: "Craftsman's Competence Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20270,
@@ -1431,7 +1450,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26735,
             name: "Craftsman's Competence Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20276,
@@ -1467,7 +1487,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33938,
             name: "Craftsman's Competence Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20290,
@@ -1580,7 +1601,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18018,
             name: "Heavens' Eye Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20267,
@@ -1616,7 +1638,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26728,
             name: "Heavens' Eye Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20279,
@@ -1652,7 +1675,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33931,
             name: "Heavens' Eye Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20289,
@@ -1765,7 +1789,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18028,
             name: 'Quickarm Materia VI',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20265,
@@ -1801,7 +1826,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26738,
             name: 'Quickarm Materia VIII',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20280,
@@ -1837,7 +1863,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33941,
             name: 'Quickarm Materia X',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20287,
@@ -1950,7 +1977,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18026,
             name: "Craftsman's Cunning Materia VI",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20270,
@@ -1986,7 +2014,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26736,
             name: "Craftsman's Cunning Materia VIII",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20276,
@@ -2022,7 +2051,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33939,
             name: "Craftsman's Cunning Materia X",
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20290,
@@ -2135,7 +2165,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18019,
             name: 'Savage Aim Materia VI',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20267,
@@ -2171,7 +2202,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26729,
             name: 'Savage Aim Materia VIII',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20279,
@@ -2207,7 +2239,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33932,
             name: 'Savage Aim Materia X',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20289,
@@ -2320,7 +2353,8 @@ exports.etroMateriaListMock = [
         tier6: {
             id: 18021,
             name: 'Battledance Materia VI',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20262,
@@ -2356,7 +2390,8 @@ exports.etroMateriaListMock = [
         tier8: {
             id: 26731,
             name: 'Battledance Materia VIII',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20278,
@@ -2392,7 +2427,8 @@ exports.etroMateriaListMock = [
         tier10: {
             id: 33934,
             name: 'Battledance Materia X',
-            description: 'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
+            description:
+                'Cannot be melded onto a piece of equipment past the first advanced materia melding slot.',
             advancedMelding: true,
             canBeHq: false,
             iconId: 20286,
@@ -2409,8 +2445,9 @@ exports.etroMateriaListMock = [
         tier10Value: 36
     }
 ];
+
 // https://etro.gg/api/gearsets/e78a29e3-1dcf-4e53-bbcf-234f33b2c831/
-exports.etroGearsetMock = {
+export const etroGearsetMock = {
     id: 'e78a29e3-1dcf-4e53-bbcf-234f33b2c831',
     jobAbbrev: 'WHM',
     jobIconPath: '/jobs/WHM.svg',
@@ -2603,8 +2640,9 @@ exports.etroGearsetMock = {
     food: 545,
     medicine: null
 };
+
 // http://localhost:3001/gearset/cc743560-11c4-4fe3-89fd-64534cfa50ca
-exports.gearsetMock = {
+export const gearsetMock = {
     id: 'bd287613-ca59-45b7-b50d-5465daca9ccc',
     jobAbbrev: 'SGE',
     name: '6.2 NR Mixed',
@@ -2645,7 +2683,7 @@ exports.gearsetMock = {
         equipment_name: 'Purgatory Boots of Healing',
         slotName: 'feet'
     },
-    offHand: { id: 0, equipment_name: '', slotName: 'unknown' },
+    offHand: {id: 0, equipment_name: '', slotName: 'unknown'},
     ears: {
         id: 37914,
         equipment_name: 'Purgatory Earrings of Healing',
