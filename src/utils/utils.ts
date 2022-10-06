@@ -1,5 +1,6 @@
-import {EtroEquipment} from '../types/etro.types';
-import {SGHEquipment, SlotNames} from '../types/gearset.types';
+import { Equipment } from '../gearset/gearset.types';
+import { SlotNames } from '../types/db.types';
+import { EtroEquipment } from '../types/etro.types';
 
 export const getEquipmentTypeByString = (
     enumValue: string
@@ -14,7 +15,7 @@ export const mapEquipIdToEquip = (
     id: number | null,
     slotName: SlotNames,
     equipment_name = ''
-): SGHEquipment | undefined => {
+): Equipment | undefined => {
     if (id) {
         return {
             id: id,
@@ -28,7 +29,7 @@ export const mapEquipIdToEquip = (
 export const mapEquip = (
     equip: (EtroEquipment | null)[],
     slotName: SlotNames
-): SGHEquipment | undefined => {
+): Equipment | undefined => {
     const e = equip.find((e) => e?.slotName === slotName);
     if (e) {
         return {
@@ -44,7 +45,7 @@ export const mapEquip = (
 export const mapFingerEquip = (
     equip: EtroEquipment | null,
     slotName: SlotNames
-): SGHEquipment => {
+): Equipment => {
     return {
         id: equip?.id ?? 0,
         equipment_name: equip?.name ?? '',
@@ -54,7 +55,7 @@ export const mapFingerEquip = (
 
 export const mapMateria = (
     etroMateria: {equipId: string; materiaIds: string[]}[],
-    sghEquip: SGHEquipment | undefined,
+    sghEquip: Equipment | undefined,
     materiaList:
         | {
               id: string;
@@ -63,7 +64,7 @@ export const mapMateria = (
               value: string;
           }[]
         | null
-): SGHEquipment | undefined => {
+): Equipment | undefined => {
     // http://localhost:3001/gearset/bd287613-ca59-45b7-b50d-5465daca9ccc
     if (!sghEquip) {
         return sghEquip;
@@ -127,4 +128,25 @@ export const mapMateria = (
     return {
         ...sghEquip
     };
+};
+
+export const buildQuery = (
+    text: string,
+    textValues: string,
+    queryValues: any[],
+    keys: string[],
+    values: (string | undefined)[],
+    index: number
+) => {
+    for (let i = 0; i < values.length; i++) {
+        const value = values[i];
+        if (value) {
+            text += `, ${keys[i]}`;
+            textValues += `,$${index}`;
+            queryValues.push(value);
+            index++;
+        }
+    }
+
+    return {text, textValues, queryValues};
 };

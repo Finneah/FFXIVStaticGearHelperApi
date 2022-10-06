@@ -1,6 +1,6 @@
-import {QueryConfig} from 'pg';
+import { QueryConfig } from 'pg';
 
-import {runQuery} from '../../database';
+import { runQuery } from '../../../database';
 import Logger from '../../logger';
 
 const logger = Logger.child({module: 'editGuildConfig'});

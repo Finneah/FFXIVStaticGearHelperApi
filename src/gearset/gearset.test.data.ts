@@ -1,4 +1,5 @@
-// https://etro.gg/api/materia
+import { Gearset, SlotNames } from './gearset.types';
+
 export const etroMateriaListMock = [
     {
         id: 16,
@@ -2446,7 +2447,6 @@ export const etroMateriaListMock = [
     }
 ];
 
-// https://etro.gg/api/gearsets/e78a29e3-1dcf-4e53-bbcf-234f33b2c831/
 export const etroGearsetMock = {
     id: 'e78a29e3-1dcf-4e53-bbcf-234f33b2c831',
     jobAbbrev: 'WHM',
@@ -2641,72 +2641,141 @@ export const etroGearsetMock = {
     medicine: null
 };
 
-// http://localhost:3001/gearset/cc743560-11c4-4fe3-89fd-64534cfa50ca
-export const gearsetMock = {
-    id: 'bd287613-ca59-45b7-b50d-5465daca9ccc',
-    jobAbbrev: 'SGE',
-    name: '6.2 NR Mixed',
-    lastUpdate: '2022-08-27T00:40:50.920096Z',
-    bisLink: undefined,
-    food: {
-        id: 578,
-        name: 'Garlean Pizza',
-        iconPath: '/i/024000/hq/024034.png'
+export const gearsetsMock: Gearset[] = [
+    {
+        id: 'bd287613-ca59-45b7-b50d-5465daca9ccc',
+        jobAbbrev: 'SGE',
+        name: 'test',
+        lastUpdate: '2022-08-27T00:40:50.920096Z',
+        bisLink: 'https://etro.gg/gearset/bd287613-ca59-45b7-b50d-5465daca9ccc',
+        food: {
+            id: 578,
+            name: 'Garlean Pizza',
+            iconPath: '/i/024000/hq/024034.png'
+        },
+        weapon: {
+            id: 37759,
+            equipment_name: 'Rinascita Pendulums',
+            slotName: SlotNames.WEAPON
+        },
+        head: {
+            id: 37787,
+            equipment_name: 'Rinascita Beret of Healing',
+            slotName: SlotNames.HEAD
+        },
+        body: {
+            id: 37902,
+            equipment_name: 'Purgatory Surcoat of Healing',
+            slotName: SlotNames.BODY
+        },
+        hands: {
+            id: 37789,
+            equipment_name: 'Rinascita Gloves of Healing',
+            slotName: SlotNames.HANDS
+        },
+        legs: {
+            id: 37790,
+            equipment_name: 'Rinascita Poleyns of Healing',
+            slotName: SlotNames.LEGS
+        },
+        feet: {
+            id: 37905,
+            equipment_name: 'Purgatory Boots of Healing',
+            slotName: SlotNames.FEET
+        },
+
+        ears: {
+            id: 37914,
+            equipment_name: 'Purgatory Earrings of Healing',
+            slotName: SlotNames.EARS
+        },
+        neck: {
+            id: 37919,
+            equipment_name: 'Purgatory Choker of Healing',
+            slotName: SlotNames.NECK
+        },
+        wrists: {
+            id: 37810,
+            equipment_name: 'Rinascita Bracelet of Healing',
+            slotName: SlotNames.WRISTS
+        },
+        fingerL: {
+            id: 37929,
+            equipment_name: 'Purgatory Ring of Healing',
+            slotName: SlotNames.FINGER_L
+        },
+        fingerR: {
+            id: 37815,
+            equipment_name: 'Rinascita Ring of Healing',
+            slotName: SlotNames.FINGER_R
+        }
     },
-    weapon: {
-        id: 37759,
-        equipment_name: 'Rinascita Pendulums',
-        slotName: 'weapon'
-    },
-    head: {
-        id: 37787,
-        equipment_name: 'Rinascita Beret of Healing',
-        slotName: 'head'
-    },
-    body: {
-        id: 37902,
-        equipment_name: 'Purgatory Surcoat of Healing',
-        slotName: 'body'
-    },
-    hands: {
-        id: 37789,
-        equipment_name: 'Rinascita Gloves of Healing',
-        slotName: 'hands'
-    },
-    legs: {
-        id: 37790,
-        equipment_name: 'Rinascita Poleyns of Healing',
-        slotName: 'legs'
-    },
-    feet: {
-        id: 37905,
-        equipment_name: 'Purgatory Boots of Healing',
-        slotName: 'feet'
-    },
-    offHand: {id: 0, equipment_name: '', slotName: 'unknown'},
-    ears: {
-        id: 37914,
-        equipment_name: 'Purgatory Earrings of Healing',
-        slotName: 'ears'
-    },
-    neck: {
-        id: 37919,
-        equipment_name: 'Purgatory Choker of Healing',
-        slotName: 'neck'
-    },
-    wrists: {
-        id: 37810,
-        equipment_name: 'Rinascita Bracelet of Healing',
-        slotName: 'wrists'
-    },
-    fingerL: {
-        id: 37929,
-        equipment_name: 'Purgatory Ring of Healing',
-        slotName: 'finger_l'
-    },
-    fingerR: {
-        id: 37815,
-        equipment_name: 'Rinascita Ring of Healing',
-        slotName: 'finger_r'
+    {
+        id: 'bd287613-ca59-45b7-b50d-5465daca9ccc',
+        jobAbbrev: 'SGE',
+        name: '6.2 NR Mixed',
+        lastUpdate: '2022-08-27T00:40:50.920096Z',
+        bisLink: 'https://etro.gg/gearset/bd287613-ca59-45b7-b50d-5465daca9ccc',
+        food: {
+            id: 578,
+            name: 'Garlean Pizza',
+            iconPath: '/i/024000/hq/024034.png'
+        },
+        weapon: {
+            id: 37759,
+            equipment_name: 'Rinascita Pendulums',
+            slotName: SlotNames.WEAPON
+        },
+        head: {
+            id: 37787,
+            equipment_name: 'Rinascita Beret of Healing',
+            slotName: SlotNames.HEAD
+        },
+        body: {
+            id: 37902,
+            equipment_name: 'Purgatory Surcoat of Healing',
+            slotName: SlotNames.BODY
+        },
+        hands: {
+            id: 37789,
+            equipment_name: 'Rinascita Gloves of Healing',
+            slotName: SlotNames.HANDS
+        },
+        legs: {
+            id: 37790,
+            equipment_name: 'Rinascita Poleyns of Healing',
+            slotName: SlotNames.LEGS
+        },
+        feet: {
+            id: 37905,
+            equipment_name: 'Purgatory Boots of Healing',
+            slotName: SlotNames.FEET
+        },
+
+        ears: {
+            id: 37914,
+            equipment_name: 'Purgatory Earrings of Healing',
+            slotName: SlotNames.EARS
+        },
+        neck: {
+            id: 37919,
+            equipment_name: 'Purgatory Choker of Healing',
+            slotName: SlotNames.NECK
+        },
+        wrists: {
+            id: 37810,
+            equipment_name: 'Rinascita Bracelet of Healing',
+            slotName: SlotNames.WRISTS
+        },
+        fingerL: {
+            id: 37929,
+            equipment_name: 'Purgatory Ring of Healing',
+            slotName: SlotNames.FINGER_L
+        },
+        fingerR: {
+            id: 37815,
+            equipment_name: 'Rinascita Ring of Healing',
+            slotName: SlotNames.FINGER_R
+        }
     }
-};
+];

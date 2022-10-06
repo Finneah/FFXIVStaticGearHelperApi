@@ -1,45 +1,63 @@
-import {SGHGearset, SlotNames} from '../types/gearset.types';
 import axios from 'axios';
-import {mapEquip, mapFingerEquip, mapMateria} from '../utils/utils';
-import {ETRO_API} from '../config';
-import {EtroGearset, EtroEquipment, EtroFood} from '../types/etro.types';
 
-export class Gearset {
-    getGearset = async (id: string): Promise<SGHGearset | undefined> => {
-        try {
-            const etroGearset = await getEtroGearset(id);
+import { ETRO_API } from '../config';
+import { EtroEquipment, EtroFood, EtroGearset } from '../types/etro.types';
+import { mapEquip, mapFingerEquip, mapMateria } from '../utils/utils';
+import { gearsetsMock } from './gearset.test.data';
+import { Gearset, SlotNames } from './gearset.types';
 
-            if (!etroGearset) {
-                return undefined;
-            }
-            let sghGearset = await getBasicGearset(etroGearset);
+export const getGearsetFromEtro = async (
+    id: string
+): Promise<Gearset | undefined> => {
+    try {
+        const etroGearset = await getEtroGearset(id);
 
-            const etroMateria = etroGearset.materia;
-
-            sghGearset = await getGearSetWithMateria(sghGearset, etroMateria);
-
-            return sghGearset;
-        } catch (error: any) {
-            return error;
+        if (!etroGearset) {
+            return undefined;
         }
-        // TODO Fehler beheben wenn link mitgegeben wird, response passt dann auch nicht
-    };
-    setGearset = async (
-        id: string,
-        name: string
-    ): Promise<SGHGearset | undefined> => {
-        try {
-            console.log(id, name);
-        } catch (error: any) {
-            return error;
-        }
-    };
-}
+        let sghGearset = await getBasicGearset(etroGearset);
 
-const getBasicGearset = async (
-    etroGearset: EtroGearset
-): Promise<SGHGearset> => {
-    const sghGearset: SGHGearset = {
+        const etroMateria = etroGearset.materia;
+
+        sghGearset = await getGearSetWithMateria(sghGearset, etroMateria);
+
+        return sghGearset;
+    } catch (error: any) {
+        return error;
+    }
+    // TODO Fehler beheben wenn link mitgegeben wird, response passt dann auch nicht
+};
+
+export const getGearsetFromDB = async (
+    name: string,
+    discord_user_id: string
+): Promise<Gearset | undefined> => {
+    try {
+        /**
+         * find gearset from user in db
+         */
+        console.log(discord_user_id);
+
+        return gearsetsMock.find((g: Gearset) => g.name === name);
+    } catch (error: any) {
+        return error;
+    }
+    // TODO Fehler beheben wenn link mitgegeben wird, response passt dann auch nicht
+};
+
+export const setGearset = async (
+    id: string,
+    name: string
+): Promise<Gearset | undefined> => {
+    try {
+        console.log(id, name);
+    } catch (error: any) {
+        return error;
+    }
+};
+
+const getBasicGearset = async (etroGearset: EtroGearset): Promise<Gearset> => {
+    const sghGearset: Gearset = {
         id: etroGearset.id,
         jobAbbrev: etroGearset.jobAbbrev,
         name: etroGearset.name,
@@ -58,7 +76,7 @@ const getBasicGearset = async (
 
     const equipList = await getEtroEquip(etroGearset);
     if (equipList) {
-        const sghGearsetWithEquip: SGHGearset = {
+        const sghGearsetWithEquip: Gearset = {
             ...sghGearset,
             weapon: mapEquip(equipList, SlotNames.WEAPON),
             head: mapEquip(equipList, SlotNames.HEAD),
@@ -87,13 +105,13 @@ const getBasicGearset = async (
 };
 
 const getGearSetWithMateria = async (
-    sghGearset: SGHGearset,
+    sghGearset: Gearset,
     etroMateria: {equipId: string; materiaIds: string[]}[]
-): Promise<SGHGearset> => {
+): Promise<Gearset> => {
     try {
         const materiaList = await getEtroMateriaList();
 
-        const sghGearsetWithEquip: SGHGearset = {
+        const sghGearsetWithEquip: Gearset = {
             ...sghGearset,
             weapon: mapMateria(etroMateria, sghGearset.weapon, materiaList),
             head: mapMateria(etroMateria, sghGearset.head, materiaList),

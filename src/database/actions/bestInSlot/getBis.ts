@@ -1,7 +1,7 @@
-import {QueryConfig} from 'pg';
-import {DBBis} from '../../../types/db.types';
+import { QueryConfig } from 'pg';
 
-import {runQuery} from '../../database';
+import { runQuery } from '../../../database';
+import { DBBis } from '../../../types/db.types';
 import Logger from '../../logger';
 
 const logger = Logger.child({module: 'getBis'});

@@ -1,21 +1,11 @@
-import {Client as PGClient, QueryConfig} from 'pg';
+import { Client as PGClient, QueryConfig } from 'pg';
 
-import {NODE_ENV, DATABASE_URL, LOCAL_DB_USER, LOCAL_DB_PW} from '../config';
-import Logger from './logger';
+import { DATABASE_URL, LOCAL_DB_PW, LOCAL_DB_USER } from './config';
+import Logger from './database/logger';
 
-const logger = Logger.child({module: 'Databse'});
+const logger = Logger.child({module: 'Database'});
 
 export const getClient = () => {
-    if (NODE_ENV === 'production') {
-        const client = new PGClient({
-            connectionString: DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false
-            }
-        });
-        client.connect();
-        return client;
-    }
     const client = new PGClient({
         connectionString: DATABASE_URL,
         ssl: false,
@@ -51,7 +41,7 @@ const createDBGuild = () => {
     moderator_role varchar(256) DEFAULT NULL,
     static_role varchar(256) DEFAULT NULL,
     bis_channel varchar(256) DEFAULT NULL,
-    bis_message_id varchar(256) DEFAULT NULL
+    overview_message_id varchar(256) DEFAULT NULL
 );`;
     client.query(string, (err, res) => {
         if (err) logger.error(err);

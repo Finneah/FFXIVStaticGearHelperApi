@@ -1,4 +1,4 @@
-export const jobListMock = [
+export const jobsMock = [
     {
         id: 38,
         abbrev: 'DNC',

@@ -1,8 +1,4 @@
-import {BaseEquipment, BaseGuild} from './gearset.types';
-
-export interface DBGuild extends BaseGuild {
-    guild_id: number;
-}
+import { BaseEquipment } from '../gearset/gearset.types';
 
 export type DBUser = {
     user_id: number;
@@ -12,7 +8,7 @@ export type DBUser = {
 export type DBBis = {
     bis_id?: number;
     gearset_id: number;
-    user_id: string;
+    user_id: number;
     bis_name: string;
     is_main?: boolean;
     weapon?: boolean;
@@ -27,7 +23,7 @@ export type DBBis = {
     wrists?: boolean;
     finger_l?: boolean;
     finger_r?: boolean;
-    bis_message_id?: string;
+    overview_message_id?: string;
 };
 
 export interface DBEquipment extends BaseEquipment {

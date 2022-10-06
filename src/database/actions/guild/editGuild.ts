@@ -1,6 +1,7 @@
-import {QueryConfig} from 'pg';
-import {SGHGuild} from '../../../types/gearset.types';
-import {runQuery} from '../../database';
+import { QueryConfig } from 'pg';
+
+import { runQuery } from '../../../database';
+import { Guild } from '../../../guild/guild.types';
 import Logger from '../../logger';
 
 const logger = Logger.child({module: 'dbUpdateGuild'});
@@ -9,7 +10,7 @@ const logger = Logger.child({module: 'dbUpdateGuild'});
  * @description edit the DBGuild on slash command /config set override
  * @param guild GuildConfigType
  */
-export const dbUpdateGuild = async (guild: SGHGuild): Promise<void> => {
+export const dbUpdateGuild = async (guild: Guild): Promise<void> => {
     try {
         const {discord_guild_id, moderator_role, static_role} = guild;
         const query: QueryConfig = {
