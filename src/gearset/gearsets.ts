@@ -224,6 +224,7 @@ const getEtroMateriaList = async (): Promise<
       }[]
     | null
 > => {
+    // https://etro.gg/api/materia/
     return axios
         .get(ETRO_API + `/materia/`)
         .then((response) => {

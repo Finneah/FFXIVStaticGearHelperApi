@@ -1,9 +1,6 @@
 import { Client as PGClient, QueryConfig } from 'pg';
 
 import { DATABASE_URL, LOCAL_DB_PW, LOCAL_DB_USER } from './config';
-import Logger from './database/logger';
-
-const logger = Logger.child({module: 'Database'});
 
 export const getClient = () => {
     const client = new PGClient({
@@ -15,12 +12,6 @@ export const getClient = () => {
     client.connect();
     return client;
 };
-
-// export const initDB = async () => {
-//     await createDBGuild();
-//     await createDBBis();
-//     await createDBGearsets();
-// };
 
 export const runQuery = async (query: QueryConfig) => {
     try {
@@ -34,134 +25,124 @@ export const runQuery = async (query: QueryConfig) => {
     }
 };
 
-const createDBGuild = () => {
-    const client = getClient();
-    const string = `CREATE TABLE IF NOT EXISTS guilds (
-    guild_id varchar(256) NOT NULL PRIMARY KEY,
-    moderator_role varchar(256) DEFAULT NULL,
-    static_role varchar(256) DEFAULT NULL,
-    bis_channel varchar(256) DEFAULT NULL,
-    overview_message_id varchar(256) DEFAULT NULL
-);`;
-    client.query(string, (err, res) => {
-        if (err) logger.error(err);
-        if (res) {
-            for (const row of res?.rows) {
-                logger.info(JSON.stringify(row));
-            }
+export const buildInsertQuery = (
+    tableName: string,
+    queryName: string,
+    values: {[s: string]: string | undefined} | ArrayLike<string | undefined>
+) => {
+    const basicText = `INSERT INTO ${tableName} (`;
+    const basicTextValues = `)VALUES(`;
+
+    const valuesForString: string[] = [];
+    const keysForString: string[] = [];
+    const indexes: string[] = [];
+
+    for (let i = 0; i < Object.values(values).length; i++) {
+        const value: string | undefined = Object.values(values)[i];
+        const key = Object.keys(values)[i];
+
+        if (value) {
+            valuesForString.push(value);
+            keysForString.push(key);
+            indexes.push(`$${valuesForString.length}`);
         }
-        client.end();
-    });
+    }
+
+    const query: QueryConfig = {
+        name: queryName,
+        text:
+            basicText +
+            keysForString.join(',') +
+            basicTextValues +
+            indexes.join(',') +
+            `) RETURNING *;`,
+        values: valuesForString
+    };
+    return query;
 };
 
-const createDBBis = () => {
-    const client = getClient();
-    const string = `CREATE TABLE IF NOT EXISTS bis (
-        bis_id SERIAL PRIMARY KEY,
-        gearset_id integer,
-        user_id varchar(256) NOT NULL,
-        guild_id varchar(256) NOT NULL,
-        bis_name varchar(256) NOT NULL,
-        is_main BOOLEAN DEFAULT false,
-        weapon BOOLEAN DEFAULT false,
-        head BOOLEAN DEFAULT false,
-        body BOOLEAN DEFAULT false,
-        hands BOOLEAN DEFAULT false,
-        legs BOOLEAN DEFAULT false,
-        feet BOOLEAN DEFAULT false,
-        offHand BOOLEAN DEFAULT false,
-        ears BOOLEAN DEFAULT false,
-        neck BOOLEAN DEFAULT false,
-        wrists BOOLEAN DEFAULT false,
-        finger_l BOOLEAN DEFAULT false,
-        finger_r BOOLEAN DEFAULT false,
-        bis_message_id varchar(256) DEFAULT NULL,
-        CONSTRAINT gearset_id
-        FOREIGN KEY(gearset_id) 
-        REFERENCES gearsets(id)
-    );`;
-    client.query(string, (err, res) => {
-        if (err) logger.error(err);
-        if (res) {
-            for (const row of res?.rows) {
-                logger.info(JSON.stringify(row));
+export const buildSelectQuery = (
+    tableName: string,
+    queryName: string,
+    values?: {[s: string]: string | undefined} | ArrayLike<string | undefined>,
+    keys?: string[]
+) => {
+    let basicText = `SELECT `;
+
+    let where = ``;
+    const valuesForString: string[] = [];
+
+    if (values) {
+        where = `WHERE `;
+        for (let i = 0; i < Object.values(values).length; i++) {
+            const value: string | undefined = Object.values(values)[i];
+            const key = Object.keys(values)[i];
+
+            if (value) {
+                valuesForString.push(value);
+
+                where += `${key}=$${valuesForString.length}`;
             }
         }
-        client.end();
-    });
+    }
+
+    if (!keys) {
+        basicText += `* FROM ${tableName} `;
+    } else {
+        basicText += `(${keys.join(',')}) FROM ${tableName} `;
+    }
+
+    const query: QueryConfig = {
+        name: queryName,
+        text: basicText + where + ';',
+        values: valuesForString
+    };
+    return query;
 };
 
-const createDBGearsets = () => {
-    const client = getClient();
-    const string = `CREATE TABLE IF NOT EXISTS gearsets (
-        id SERIAL PRIMARY KEY,
-        last_update timestamp with time zone,
-        bis_link varchar(256) NOT NULL, 
-        jobAbbrev varchar(5),
-        weapon varchar(256),
-        head varchar(256),
-        body varchar(256),
-        hands varchar(256),
-        legs varchar(256),
-        feet varchar(256),
-        offHand varchar(256),
-        ears varchar(256),
-        neck varchar(256),
-        wrists varchar(256),
-        finger_l varchar(256),
-        finger_r varchar(256),
-        food varchar(256),
-        materia text
-    );`;
-    client.query(string, (err, res) => {
-        if (err) logger.error(err);
-        if (res) {
-            for (const row of res?.rows) {
-                logger.info(JSON.stringify(row));
-            }
-        }
-        client.end();
-    });
-};
+export const buildUpdateQuery = (
+    tableName: string,
+    queryName: string,
+    whereValues:
+        | {[s: string]: string | undefined}
+        | ArrayLike<string | undefined>,
+    values: {[s: string]: string | undefined} | ArrayLike<string | undefined>
+) => {
+    const basicText = `UPDATE ${tableName} SET `;
+    const valuesForString: string[] = [];
+    const valueString: string[] = [];
+    const keysForString: string[] = [];
+    const indexes: string[] = [];
+    let where = `WHERE `;
 
-const alterTableBisRemoveBisLink = async () => {
-    const client = getClient();
-    const dropBisLinkString = `ALTER Table bis DROP COLUMN bis_link`;
-    await client.query(dropBisLinkString, (err, res) => {
-        if (err) logger.error(err);
-        if (res) {
-            for (const row of res?.rows) {
-                logger.info(JSON.stringify(row));
-            }
-        }
-        client.end();
-    });
-};
+    if (values) {
+        for (let i = 0; i < Object.values(values).length; i++) {
+            const value: string | undefined = Object.values(values)[i];
+            const key = Object.keys(values)[i];
 
-const alterTableBisAddGearsetId = async () => {
-    const client = getClient();
-    const string = `ALTER TABLE bis ADD COLUMN IF NOT EXISTS gearset_id integer;`;
-    await client.query(string, (err, res) => {
-        if (err) logger.error(err);
-        if (res) {
-            for (const row of res?.rows) {
-                logger.info(JSON.stringify(row));
+            if (value) {
+                indexes.push(`${i + 1}`);
+                keysForString.push(key);
+                valuesForString.push(value);
+                valueString.push(`${key}=$${indexes.length}`);
             }
         }
-        client.end();
-    });
-};
+    }
+    for (let i = 0; i < Object.values(whereValues).length; i++) {
+        const value: string | undefined = Object.values(whereValues)[i];
+        const key = Object.keys(whereValues)[i];
 
-const alterTableBisAddGearsetIdConstraint = async () => {
-    const client = getClient();
-    const string = `ALTER TABLE bis ADD CONSTRAINT gearset_id FOREIGN KEY (gearset_id) REFERENCES gearsets (id)`;
-    await client.query(string, (err, res) => {
-        if (err) logger.error(err);
-        if (res) {
-            for (const row of res?.rows) {
-                logger.info(JSON.stringify(row));
-            }
+        if (value) {
+            indexes.push(`${i + 1}`);
+            valuesForString.push(value);
+            where += `${key}=$${indexes.length}`;
         }
-        client.end();
-    });
+    }
+
+    const query: QueryConfig = {
+        name: queryName,
+        text: basicText + valueString + ' ' + where + ' RETURNING *;',
+        values: valuesForString
+    };
+    return query;
 };

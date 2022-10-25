@@ -1,3 +1,5 @@
+import { QueryConfig } from 'pg';
+
 import { Equipment } from '../gearset/gearset.types';
 import { SlotNames } from '../types/db.types';
 import { EtroEquipment } from '../types/etro.types';
@@ -128,25 +130,4 @@ export const mapMateria = (
     return {
         ...sghEquip
     };
-};
-
-export const buildQuery = (
-    text: string,
-    textValues: string,
-    queryValues: any[],
-    keys: string[],
-    values: (string | undefined)[],
-    index: number
-) => {
-    for (let i = 0; i < values.length; i++) {
-        const value = values[i];
-        if (value) {
-            text += `, ${keys[i]}`;
-            textValues += `,$${index}`;
-            queryValues.push(value);
-            index++;
-        }
-    }
-
-    return {text, textValues, queryValues};
 };

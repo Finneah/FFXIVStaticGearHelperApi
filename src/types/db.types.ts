@@ -1,10 +1,5 @@
 import { BaseEquipment } from '../gearset/gearset.types';
 
-export type DBUser = {
-    user_id: number;
-    discord_user_id: string;
-};
-
 export type DBBis = {
     bis_id?: number;
     gearset_id: number;

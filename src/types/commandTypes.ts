@@ -26,7 +26,7 @@ export enum ButtonCommandNames {
 
 export enum OptionNames {
     MODERATOR_ROLE = 'moderator_role',
-    STATIC_ROLE = 'static_role',
+    BEST_IN_SLOT_ROLE = 'best_in_slot_role',
     LINK = 'link',
     NAME = 'name',
     ID = 'id',

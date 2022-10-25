@@ -1,4 +1,3 @@
-import { DBUser } from '../types/db.types';
 import { EtroFood } from '../types/etro.types';
 
 export enum SlotNames {
@@ -65,6 +64,13 @@ export type Materia = {
 
 export type Food = EtroFood;
 
-export interface User extends DBUser {
-    bis_ids?: number[];
+export interface Static {
+    static_id: number;
+    guild_id: number;
+    static_name: number;
+    overview_message_id?: string;
+    keyword_loot?: string;
+    keyword_buy?: string;
+    members_count: number;
+    thumbnail?: string;
 }

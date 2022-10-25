@@ -1,14 +1,21 @@
-import { User } from '../gearset/gearset.types';
+import { Static } from '../gearset/gearset.types';
 
 export type BaseGuild = {
-    guild_id?: number;
+    guild_id: number;
     discord_guild_id: string;
-    moderator_role?: string;
-    static_role?: string;
-    sgh_channel_id?: string;
+    moderator_role: string;
+    best_in_slot_role?: string;
     overview_message_id?: string;
 };
 
 export interface Guild extends BaseGuild {
-    users?: User[];
+    statics?: Static[];
 }
+
+export type GuildParams = {
+    guild_id?: string;
+    discord_guild_id?: string;
+    moderator_role?: string;
+    best_in_slot_role?: string;
+    overview_message_id?: string;
+};

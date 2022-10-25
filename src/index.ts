@@ -2,7 +2,8 @@ import express from 'express';
 import path from 'path';
 
 import { getGearsetFromDB, getGearsetFromEtro, setGearset } from './gearset/gearsets';
-import { editGuild, getGuild, getGuilds, getGuildUser, setGuild } from './guild/guilds';
+import { GuildParams } from './guild/guild.types';
+import { editGuild, getGuild, getGuilds, setGuild } from './guild/guilds';
 import { getJobs } from './jobs/jobs';
 
 const port = 3001;
@@ -19,7 +20,11 @@ app.get('/', (req, res) => {
     res.send(req.query.search);
 });
 
-// http://localhost:3001/gearset/bd287613-ca59-45b7-b50d-5465daca9ccc
+/**
+ * RULE
+ * Always send with discord_id for validation. If Discord_id is not set => nothing
+ */
+// http://localhost:3001/etrogearset/80bec2f5-8e9e-43fb-adcf-0cd7f7018c02
 app.get('/etrogearset/:etro_id', async (req, res) => {
     const {etro_id} = req.params;
     if (!etro_id) {
@@ -30,6 +35,98 @@ app.get('/etrogearset/:etro_id', async (req, res) => {
 
     res.send(gear);
 });
+
+// http://localhost:3001/guilds/
+app.get('/guilds/', async (req, res) => {
+    const guilds = await getGuilds();
+
+    res.send(guilds);
+});
+
+// http://localhost:3001/guild/1
+app.get('/guild/:guild_id', async (req, res) => {
+    const guild_id = req.params.guild_id;
+    if (!guild_id) {
+        res.send('Missing guild_id');
+    }
+
+    const guild = await getGuild(guild_id);
+    res.send(guild);
+});
+
+// http://localhost:3001/addguild/1004408026922487838/1028091555598323722
+app.get('/addguild/:discord_guild_id/:moderator_role', async (req, res) => {
+    const params = req.query as unknown as GuildParams;
+
+    const discord_guild_id = req.params.discord_guild_id;
+    const moderator_role = req.params.moderator_role;
+    if (!discord_guild_id) {
+        res.send('Missing discord_guild_id');
+        return;
+    }
+
+    if (!moderator_role) {
+        res.send('Missing moderator_role');
+        return;
+    }
+    const guild = await setGuild({...params, discord_guild_id, moderator_role});
+
+    res.send(guild);
+});
+
+// http://localhost:3001/editguild/2?best_in_slot_role=1028091555598323722
+app.get('/editguild/:guild_id', async (req, res) => {
+    const params = req.query as unknown as GuildParams;
+    const guild_id = req.params.guild_id;
+    if (!guild_id) {
+        res.send('Missing Guild Id');
+        return;
+    }
+    const guild = await editGuild({...params, guild_id});
+    res.send(guild);
+});
+
+// http://localhost:3001/getstatics/2
+app.get('/getstatics/:guild_id', async (req, res) => {
+    const params = req.query as unknown as GuildParams;
+    const guild_id = req.params.guild_id;
+    if (!guild_id) {
+        res.send('Missing Guild Id');
+        return;
+    }
+
+    res.send({guild_id, ...params});
+});
+
+// http://localhost:3001/getstatic/1
+app.get('/getstatic/:static_id', async (req, res) => {
+    const params = req.query as unknown as GuildParams;
+    const static_id = req.params.static_id;
+    if (!static_id) {
+        res.send('Missing Static Id');
+        return;
+    }
+
+    res.send({static_id, ...params});
+});
+
+// http://localhost:3001/setstatic/2/the professionels
+app.get('/setstatic/:guild_id/:static_name', async (req, res) => {
+    const params = req.query as unknown as GuildParams;
+    const guild_id = req.params.guild_id;
+    const static_name = req.params.static_name;
+    if (!guild_id) {
+        res.send('Missing Guild Id');
+        return;
+    }
+    if (!static_name) {
+        res.send('Missing Static Name');
+        return;
+    }
+
+    res.send({guild_id, static_name, ...params});
+});
+
 // http://localhost:3001/getgearset/1/namentest/1
 app.get('/getgearset/:name/:discord_user_id', async (req, res) => {
     const {name, discord_user_id} = req.params;
@@ -45,8 +142,8 @@ app.get('/getgearset/:name/:discord_user_id', async (req, res) => {
     res.send(gear);
 });
 
-// http://localhost:3001/setgearset?id=bd287613-ca59-45b7-b50d-5465daca9ccc&name=namentest
-app.get('/setgearset', async (req, res) => {
+// http://localhost:3001/addgearset?id=bd287613-ca59-45b7-b50d-5465daca9ccc&name=namentest
+app.get('/addgearset', async (req, res) => {
     const id = req.query.id;
     const name = req.query.name;
     if (!id) {
@@ -68,72 +165,22 @@ app.get('/jobs/', async (req, res) => {
     res.send(jobs);
 });
 
-// http://localhost:3001/guilds/
-app.get('/guilds/', async (req, res) => {
-    const guilds = await getGuilds();
+// // http://localhost:3001/deleteuser/1004408026922487838/
+// app.get('/deleteuser/:discord_guild_id/:discord_user_id', async (req, res) => {
+//     const guild_id = req.params.discord_guild_id;
+//     const moderator_role = req.query.moderator_role?.toString();
+//     const best_in_slot_role = req.query.best_in_slot_role?.toString();
 
-    res.send(guilds);
-});
-
-// http://localhost:3001/guild/1004408026922487838
-app.get('/guild/:discord_guild_id', async (req, res) => {
-    const discord_guild_id = req.params.discord_guild_id;
-    if (!discord_guild_id) {
-        res.send('Missing guild_id or discord_guild_id');
-    }
-
-    const guild = await getGuild(discord_guild_id.toString());
-    res.send(guild);
-});
-
-// http://localhost:3001/setguild?discord_guild_id=1234&moderator_role=1008007852033581106&static_role=1008008105650569268&overview_message_id=123
-app.get('/setguild', async (req, res) => {
-    const discord_guild_id = req.query.discord_guild_id;
-    const moderator_role = req.query.moderator_role?.toString();
-    const static_role = req.query.static_role?.toString();
-    const sgh_channel_id = req.query.sgh_channel_id?.toString();
-    const overview_message_id = req.query.overview_message_id?.toString();
-    if (!discord_guild_id) {
-        res.send('Missing Guild_id');
-        return;
-    }
-    console.log(overview_message_id);
-
-    const guild = await setGuild(
-        discord_guild_id.toString(),
-        moderator_role,
-        static_role,
-        sgh_channel_id,
-        overview_message_id
-    );
-
-    res.send(guild);
-});
-
-// http://localhost:3001/editguild?guild_id=1&moderator_role=1234&static_role=1234
-app.get('/editguild', async (req, res) => {
-    const guild_id = req.query.guild_id;
-    const moderator_role = req.query.moderator_role?.toString();
-    const static_role = req.query.static_role?.toString();
-    const sgh_channel_id = req.query.sgh_channel_id?.toString();
-    const overview_message_id = req.query.overview_message_id?.toString();
-    if (!guild_id) {
-        res.send('Missing Guild_id');
-        return;
-    }
-    const guild = await editGuild(
-        Number(guild_id),
-        moderator_role,
-        static_role,
-        sgh_channel_id,
-        overview_message_id
-    );
-    res.send(guild);
-});
-
-// http://localhost:3001/getguilduser/1
-app.get('/getguilduser/:guild_id', async (req, res) => {
-    const guild = await getGuildUser(Number(req.params.guild_id));
-
-    res.send(guild);
-});
+//     const overview_message_id = req.query.overview_message_id?.toString();
+//     if (!guild_id) {
+//         res.send('Missing discord_guild_id');
+//         return;
+//     }
+//     const guild = await editGuild(
+//         Number(guild_id),
+//         moderator_role,
+//         best_in_slot_role,
+//         overview_message_id
+//     );
+//     res.send(guild);
+// });

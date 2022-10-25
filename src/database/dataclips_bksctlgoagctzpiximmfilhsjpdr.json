@@ -1,14 +1,16 @@
 {
     "title": "Guilds",
-    "values": [ 
-        [ // dev server
+    "values": [
+        [
+            // dev server
             "968410103999004732",
             "1008007852033581106",
             "1008008105650569268",
             null,
             "1014955723123326996"
         ],
-        [ // static server
+        [
+            // static server
             "391950649778241536",
             "997810340605734932",
             "997810340605734932",
@@ -19,7 +21,7 @@
     "fields": [
         "guild_id",
         "moderator_role",
-        "static_role",
+        "best_in_slot_role",
         "bis_channel",
         "bis_message_id"
     ]
