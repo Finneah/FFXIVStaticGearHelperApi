@@ -1,8 +1,8 @@
 import { QueryConfig } from 'pg';
 
+import Logger from '../../../controller/logger';
 import { runQuery } from '../../../database';
-import { DBBis, SlotNames } from '../../../types/db.types';
-import Logger from '../../logger';
+import { DBBis, SlotNames } from '../../../models/db.types';
 import { getBisByUserByName } from './getBis';
 
 const logger = Logger.child({module: 'editBisFromUser'});

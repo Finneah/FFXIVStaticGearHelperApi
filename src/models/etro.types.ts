@@ -1,4 +1,4 @@
-import { BaseGearset } from '../gearset/gearset.types';
+import { BaseGearset } from '../database/gearset/gearset.types';
 
 export type EtroFood = {
     id: number;

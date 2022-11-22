@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pino = require('pino');
-import {createWriteStream} from 'fs';
-import {NODE_ENV} from '../config';
+import { createWriteStream } from 'fs';
+
+import { NODE_ENV } from '../config/config';
 
 const streams = [
     {level: 'error', stream: createWriteStream('./log.json', {flags: 'a'})},

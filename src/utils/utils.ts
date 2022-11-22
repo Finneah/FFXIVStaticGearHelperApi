@@ -1,8 +1,8 @@
 import { QueryConfig } from 'pg';
 
-import { Equipment } from '../gearset/gearset.types';
-import { SlotNames } from '../types/db.types';
-import { EtroEquipment } from '../types/etro.types';
+import { Equipment } from '../database/gearset/gearset.types';
+import { SlotNames } from '../models/db.types';
+import { EtroEquipment } from '../models/etro.types';
 
 export const getEquipmentTypeByString = (
     enumValue: string

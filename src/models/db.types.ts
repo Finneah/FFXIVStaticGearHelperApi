@@ -1,4 +1,4 @@
-import { BaseEquipment } from '../gearset/gearset.types';
+import { BaseEquipment } from '../database/gearset/gearset.types';
 
 export type DBBis = {
     bis_id?: number;

@@ -1,4 +1,4 @@
-import { Static } from '../gearset/gearset.types';
+import { Static } from '../database/gearset/gearset.types';
 
 export type BaseGuild = {
     guild_id: number;

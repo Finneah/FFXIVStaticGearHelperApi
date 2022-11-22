@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { ETRO_API } from '../config';
-import { EtroEquipment, EtroFood, EtroGearset } from '../types/etro.types';
-import { mapEquip, mapFingerEquip, mapMateria } from '../utils/utils';
+import { ETRO_API } from '../../config/config';
+import { EtroEquipment, EtroFood, EtroGearset } from '../../models/etro.types';
+import { mapEquip, mapFingerEquip, mapMateria } from '../../utils/utils';
 import { gearsetsMock } from './gearset.test.data';
 import { Gearset, SlotNames } from './gearset.types';
 

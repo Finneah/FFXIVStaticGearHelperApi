@@ -1,7 +1,7 @@
 import { QueryConfig } from 'pg';
 
+import Logger from '../../../controller/logger';
 import { runQuery } from '../../../database';
-import Logger from '../../logger';
 
 const logger = Logger.child({module: 'deleteBisFromUser'});
 

@@ -1,9 +1,9 @@
 import { QueryConfig } from 'pg';
 
+import Logger from '../../../controller/logger';
 import { runQuery } from '../../../database';
-import { CommandNames, OptionNames, SubCommandNames } from '../../../types/commandTypes';
-import { DBBis } from '../../../types/db.types';
-import Logger from '../../logger';
+import { CommandNames, OptionNames, SubCommandNames } from '../../../models/commandTypes';
+import { DBBis } from '../../../models/db.types';
 
 const logger = Logger.child({module: 'setBisForUser'});
 

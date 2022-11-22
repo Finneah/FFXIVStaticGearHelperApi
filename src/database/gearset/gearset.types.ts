@@ -1,4 +1,4 @@
-import { EtroFood } from '../types/etro.types';
+import { EtroFood } from '../../models/etro.types';
 
 export enum SlotNames {
     WEAPON = 'weapon',

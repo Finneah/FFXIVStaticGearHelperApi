@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ETRO_API } from '../config';
+import { ETRO_API } from '../../config/config';
 import { Job } from './jobs.types';
 
 export const getJobs = async (): Promise<Job[] | undefined> => {
