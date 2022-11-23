@@ -1,14 +1,10 @@
-import { QueryConfig } from 'pg';
+import {QueryConfig} from 'pg';
 
-import Logger from '../../../controller/logger';
-import { runQuery } from '../../../database';
+import Logger from '../../../utils/logger';
 
 const logger = Logger.child({module: 'editGuildConfig'});
 
-export const deleteUser = async (
-    user_id: string,
-    guild_id: string
-): Promise<number> => {
+export const deleteUser = async (user_id: string, guild_id: string) => {
     try {
         const query: QueryConfig = {
             name: 'delete-User',
@@ -16,10 +12,10 @@ export const deleteUser = async (
             values: [user_id, guild_id]
         };
 
-        const res = await runQuery(query);
-        logger.info(`delete-User ${JSON.stringify(res.rowCount)}`);
+        // const res = await runQuery(query);
+        // logger.info(`delete-User ${JSON.stringify(res.rowCount)}`);
 
-        return res.rowCount ?? 0;
+        // return res.rowCount ?? 0;
     } catch (error) {
         return 0;
     }

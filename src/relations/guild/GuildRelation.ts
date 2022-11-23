@@ -34,40 +34,40 @@ class GuildsRelation {
                 moderator_role
             });
         } catch (error) {
-            return error;
+            return Promise.reject(error);
         }
     }
-    async setModeratorRole(guild: Guild, moderator_role: string) {
+    async setModeratorRole(guildModel: Guild, moderator_role: string) {
         try {
-            await guild.setDataValue('moderator_role', moderator_role);
-            return await guild.save();
+            await guildModel.setDataValue('moderator_role', moderator_role);
+            return await guildModel.save();
         } catch (error) {
-            return error;
+            return Promise.reject(error);
         }
     }
-    async getModeratorRole(guild: Guild) {
+    async getModeratorRole(guildModel: Guild) {
         try {
-            return await guild.getDataValue('moderator_role');
+            return await guildModel.getDataValue('moderator_role');
         } catch (error) {
-            return error;
+            return Promise.reject(error);
         }
     }
-    async setOverviewMessageId(guild: Guild, overview_message_id: string) {
+    async setOverviewMessageId(guildModel: Guild, overview_message_id: string) {
         try {
-            await guild.setDataValue(
+            await guildModel.setDataValue(
                 'overview_message_id',
                 overview_message_id
             );
-            return await guild.save();
+            return await guildModel.save();
         } catch (error) {
-            return error;
+            return Promise.reject(error);
         }
     }
-    async getOverviewMessageId(guild: Guild) {
+    async getOverviewMessageId(guildModel: Guild) {
         try {
-            return await guild.getDataValue('overview_message_id');
+            return await guildModel.getDataValue('overview_message_id');
         } catch (error) {
-            return error;
+            return Promise.reject(error);
         }
     }
 }

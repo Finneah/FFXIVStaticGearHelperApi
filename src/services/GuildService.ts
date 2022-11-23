@@ -1,5 +1,5 @@
-import { guildsRelation } from '../database/guild/GuildsRelation';
 import { Guild } from '../models/Guilds';
+import { guildsRelation } from '../relations/guild/GuildRelation';
 
 class GuildService {
     async getGuilds() {

@@ -1,8 +1,7 @@
-import { QueryConfig } from 'pg';
+import {QueryConfig} from 'pg';
 
-import Logger from '../../../controller/logger';
-import { runQuery } from '../../../database';
-import { DBBis } from '../../../models/db.types';
+import {DBBis} from '../../../models/db.types';
+import Logger from '../../../utils/logger';
 
 const logger = Logger.child({module: 'getBis'});
 
@@ -14,7 +13,7 @@ const logger = Logger.child({module: 'getBis'});
 export const getAllBisByUserByGuild = async (
     userId: string,
     guildId: string
-): Promise<DBBis[] | null> => {
+) => {
     try {
         const query: QueryConfig = {
             name: 'get-BisByUser',
@@ -22,10 +21,10 @@ export const getAllBisByUserByGuild = async (
             values: [userId, guildId]
         };
 
-        const res = await runQuery(query);
-        logger.info(`get-BisForUser ${JSON.stringify(res?.rows)}`);
+        // const res = await runQuery(query);
+        // logger.info(`get-BisForUser ${JSON.stringify(res?.rows)}`);
 
-        return res?.rows ?? null;
+        // return res?.rows ?? null;
     } catch (error) {
         return Promise.reject('getBisByUser');
     }
@@ -42,7 +41,7 @@ export const getBisByUserByName = async (
     userId: string,
     bis_name: string,
     guild_id: string
-): Promise<DBBis | null> => {
+) => {
     try {
         const query: QueryConfig = {
             name: 'get-BisByUserByName',
@@ -50,9 +49,9 @@ export const getBisByUserByName = async (
             values: [userId, bis_name, guild_id]
         };
 
-        const res = await runQuery(query);
-        logger.info(`get-BisByUserByName ${JSON.stringify(res?.rows[0])}`);
-        return res?.rows[0] ?? null;
+        // const res = await runQuery(query);
+        // logger.info(`get-BisByUserByName ${JSON.stringify(res?.rows[0])}`);
+        // return res?.rows[0] ?? null;
     } catch (error) {
         return Promise.reject(error);
     }
@@ -63,9 +62,7 @@ export const getBisByUserByName = async (
  * @param guild_id string
  * @returns Promise<BisLinksType[] | null>
  */
-export const getMainBisAll = async (
-    guild_id: string
-): Promise<DBBis[] | null> => {
+export const getMainBisAll = async (guild_id: string) => {
     try {
         const query: QueryConfig = {
             name: 'get-AllMainBis',
@@ -73,12 +70,12 @@ export const getMainBisAll = async (
             values: [guild_id]
         };
 
-        const res = await runQuery(query);
+        // const res = await runQuery(query);
 
-        logger.info(
-            `get-AllMainBis ${res.rows.length} ${JSON.stringify(res?.rows)}`
-        );
-        return res?.rows ?? null;
+        // logger.info(
+        //     `get-AllMainBis ${res.rows.length} ${JSON.stringify(res?.rows)}`
+        // );
+        // return res?.rows ?? null;
     } catch (error) {
         return Promise.reject(error);
     }
@@ -90,10 +87,7 @@ export const getMainBisAll = async (
  * @param guild_id string
  * @returns Promise<BisLinksType | null>
  */
-export const getMainBisByUser = async (
-    userId: string,
-    guild_id: string
-): Promise<DBBis | null> => {
+export const getMainBisByUser = async (userId: string, guild_id: string) => {
     try {
         const query: QueryConfig = {
             name: 'get-MainBisFromUser',
@@ -101,9 +95,9 @@ export const getMainBisByUser = async (
             values: [userId, guild_id]
         };
 
-        const res = await runQuery(query);
-        logger.info(`get-MainBisFromUser ${JSON.stringify(res?.rows[0])}`);
-        return res?.rows[0] ?? null;
+        // const res = await runQuery(query);
+        // logger.info(`get-MainBisFromUser ${JSON.stringify(res?.rows[0])}`);
+        // return res?.rows[0] ?? null;
     } catch (error) {
         return Promise.reject(error);
     }

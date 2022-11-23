@@ -1,9 +1,7 @@
-import { QueryConfig } from 'pg';
+import {QueryConfig} from 'pg';
 
-import Logger from '../../../controller/logger';
-import { runQuery } from '../../../database';
-import { CommandNames, OptionNames, SubCommandNames } from '../../../models/commandTypes';
-import { DBBis } from '../../../models/db.types';
+import {DBBis} from '../../../models/db.types';
+import Logger from '../../../utils/logger';
 
 const logger = Logger.child({module: 'setBisForUser'});
 
@@ -13,10 +11,7 @@ const logger = Logger.child({module: 'setBisForUser'});
  * @param guild_id string
  * @returns Promise<string>
  */
-export const setBisForUser = async (
-    bisLinkData: DBBis,
-    guild_id: string
-): Promise<string> => {
+export const setBisForUser = async (bisLinkData: DBBis, guild_id: string) => {
     try {
         const setBis: QueryConfig = {
             name: 'set-BisForUser',
@@ -29,9 +24,9 @@ export const setBisForUser = async (
             ]
         };
 
-        const res = await runQuery(setBis);
-        logger.info(`set-BisForUser ${JSON.stringify(res)}`);
-        return `BiS ${bisLinkData.bis_name} Gespeichert. Schau es dir mit \`/${CommandNames.MYBIS} ${SubCommandNames.GET} :${OptionNames.NAME}\` gleich an`;
+        // const res = await runQuery(setBis);
+        // logger.info(`set-BisForUser ${JSON.stringify(res)}`);
+        // return `BiS ${bisLinkData.bis_name} Gespeichert. Schau es dir mit \`/${CommandNames.MYBIS} ${SubCommandNames.GET} :${OptionNames.NAME}\` gleich an`;
     } catch (error: any) {
         return error;
     }
@@ -56,15 +51,12 @@ export const setMainBis = async (
             values: [false, user_id, guild_id]
         };
 
-        await runQuery(setFalseQuery);
-
         const setTrueQuery: QueryConfig = {
             name: 'set-isMain',
             text: `UPDATE bis SET is_main=$1 WHERE bis_name=$2 AND user_id=$3 AND guild_id=$4;`,
             values: [true, bis_name, user_id, guild_id]
         };
 
-        await runQuery(setTrueQuery);
         logger.info(
             `set-isMain ${JSON.stringify({
                 is_main: true
@@ -87,7 +79,7 @@ export const setMainBisGearByUser = async (
     userId: string,
     gearType: string,
     guild_id: string
-): Promise<DBBis | null> => {
+) => {
     try {
         const query: QueryConfig = {
             name: 'set-MainBisGearByUser',
@@ -95,9 +87,8 @@ export const setMainBisGearByUser = async (
             values: [userId, guild_id]
         };
 
-        const res = await runQuery(query);
-        logger.info(`set-MainBisGearByUser ${JSON.stringify(res?.rows[0])}`);
-        return res?.rows[0] ?? null;
+        // logger.info(`set-MainBisGearByUser ${JSON.stringify(res?.rows[0])}`);
+        // return res?.rows[0] ?? null;
     } catch (error) {
         return Promise.reject(error);
     }
@@ -124,7 +115,6 @@ export const setBisMessageIdByUser = async (
             values: [bis_message_id, bis_name, user_Id, guild_id]
         };
 
-        await runQuery(query);
         logger.info(`set-BisMessageIdFromUser`);
     } catch (error) {
         return Promise.reject('set-BisMessageIdFromUser');

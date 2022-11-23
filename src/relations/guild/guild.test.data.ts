@@ -1,18 +1,16 @@
-import { DBBis } from '../../models/db.types';
-import { Guild } from '../../types/guild.types';
+import {DBBis} from '../../models/db.types';
+import {Guild} from '../../types/guild.types';
 
 export const guildsMock: Guild[] = [
     {
         guild_id: 1,
         discord_guild_id: '1004408026922487838',
-        moderator_role: '1027296476386299924',
-        best_in_slot_role: '1027296476386299924'
+        moderator_role: '1027296476386299924'
     },
     {
         guild_id: 2,
         discord_guild_id: '968410103999004732',
-        moderator_role: '1008007852033581106',
-        best_in_slot_role: '1008008105650569268'
+        moderator_role: '1008007852033581106'
     }
 ];
 

@@ -1,7 +1,6 @@
-import { QueryConfig } from 'pg';
+import {QueryConfig} from 'pg';
 
-import Logger from '../../../controller/logger';
-import { runQuery } from '../../../database';
+import Logger from '../../../utils/logger';
 
 const logger = Logger.child({module: 'deleteBisFromUser'});
 
@@ -23,8 +22,8 @@ export const deleteBisSingle = async (
             values: [bis_name, user_Id, guild_id]
         };
 
-        const res = await runQuery(query);
-        logger.info(`delete-BisFromUser ${JSON.stringify(res?.rows[0])}`);
+        // const res = await runQuery(query);
+        // logger.info(`delete-BisFromUser ${JSON.stringify(res?.rows[0])}`);
     } catch (error) {
         // errorHandler('deleteBisFromUser', error);
     }

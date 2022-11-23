@@ -1,5 +1,5 @@
 import { guildService } from '../services/GuildService';
-import Logger from './logger';
+import Logger from '../utils/logger';
 
 const logger = Logger.child({module: 'GuildController'});
 
@@ -20,9 +20,9 @@ class GuildController {
         guild_id: string,
         params: {moderator_role?: string; overview_message_id?: string}
     ) {
-        const guild = await this.getGuild(guild_id);
-
         logger.info('Controller: editGuild');
+
+        const guild = await this.getGuild(guild_id);
 
         if (guild && params.moderator_role) {
             guildService.setModeratorRole(guild, params.moderator_role);
