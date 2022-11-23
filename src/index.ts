@@ -1,13 +1,15 @@
 import express from 'express';
 import path from 'path';
 
-import guildsRouter from './api/api_routes/guild.routes';
+import guildRouter from './api/api_routes/guild.routes';
 import staticRouter from './api/api_routes/static.router';
-import staticMembersRouter from './api/api_routes/staticMember.routes';
+import staticMemberRouter from './api/api_routes/staticMember.routes';
+import userBisRouter from './api/api_routes/userBis.routes';
 import { guildsService } from './api/guild/guild.service';
 import { staticController } from './api/static/static.controller';
 import { staticService } from './api/static/static.service';
 import { staticMembersService } from './api/staticMember/staticMember.service';
+import { userBisService } from './api/userBis/userBis.service';
 
 const port = 3001;
 const hostname = 'localhost';
@@ -24,8 +26,11 @@ const init = async () => {
     await staticService.syncStatics();
 
     await staticMembersService.syncStaticMembers();
+    await userBisService.syncUserBis();
 };
+
 init();
+
 // http://localhost:3001/
 app.get('/', function (req, res) {
     res.send('GET request to the homepage');
@@ -36,9 +41,10 @@ app.post('/', function (req, res) {
     res.send('POST request to the homepage');
 });
 
-app.use('/guilds', guildsRouter);
+app.use('/guilds', guildRouter);
 app.use('/statics', staticRouter);
-app.use('/staticMembers', staticMembersRouter);
+app.use('/staticMembers', staticMemberRouter);
+app.use('/userBis', userBisRouter);
 
 app.put('/addstatic/:guild_id/:static_name', async (req, res) => {
     const guild_id = req.params.guild_id;

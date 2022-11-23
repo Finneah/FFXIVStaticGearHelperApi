@@ -1,4 +1,3 @@
-import { ErrorCodes } from '../APIErrorHandler';
 import { StaticMember } from './staticMember.model';
 
 class StaticMembersService {
@@ -38,29 +37,24 @@ class StaticMembersService {
         user_discord_id: string
     ): Promise<StaticMember | null> {
         try {
-            const exist = await StaticMember.findOne({
-                where: {static_id, user_discord_id}
+            const staticMember = await StaticMember.findOrCreate({
+                where: {
+                    static_id,
+                    user_discord_id
+                },
+                defaults: {static_id, user_discord_id}
             });
-            if (exist) {
-                throw {
-                    code: ErrorCodes.STATIC_EXIST,
-                    message: `User mit der Id "${user_discord_id}" existiert bereits in dieser Static Gruppe`
-                };
-            }
-            return await StaticMember.create({
-                static_id,
-                user_discord_id
-            });
+            return staticMember[0];
         } catch (error) {
             return Promise.reject(error);
         }
     }
     async setMainBis(
         staticMember: StaticMember,
-        main_bis_id: number
+        bis_id: number
     ): Promise<StaticMember | null> {
         try {
-            await staticMember.setDataValue('main_bis_id', main_bis_id);
+            await staticMember.setDataValue('main_bis_id', bis_id);
             return await staticMember.save();
         } catch (error) {
             return Promise.reject(error);

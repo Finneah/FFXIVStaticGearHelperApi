@@ -1,5 +1,9 @@
 import { Sequelize } from 'sequelize';
 
+import { guildsService } from '../api/guild/guild.service';
+import { staticService } from '../api/static/static.service';
+import { staticMembersService } from '../api/staticMember/staticMember.service';
+import { userBisService } from '../api/userBis/userBis.service';
 import { LOCAL_DB_PW, LOCAL_DB_USER } from '../config/config';
 
 export const connect = () => {

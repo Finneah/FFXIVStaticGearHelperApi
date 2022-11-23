@@ -38,10 +38,9 @@ class StaticAPI extends API {
                     return;
                 }
 
-                const discord_guild_id =
-                    await super.getDiscordGuildIdByStaticId(data.static_id);
+                const guild = await super.getGuildByStaticId(data.static_id);
                 super.withPermissionCheck(
-                    discord_guild_id || '',
+                    guild?.discord_guild_id || '',
                     headerKey,
                     res,
                     () => res.json(data)
@@ -71,11 +70,18 @@ class StaticAPI extends API {
                 'Missing Static Name'
             );
         }
-        const discord_guild_id = await super.getDiscordGuildIdByGuildId(
-            parseInt(guild_id)
-        );
-        super.withPermissionCheck(discord_guild_id || '', headerKey, res, () =>
-            this.handleSetStatic(res, parseInt(guild_id), static_name, params)
+        const guild = await super.getGuildByGuildId(parseInt(guild_id));
+        super.withPermissionCheck(
+            guild?.discord_guild_id || '',
+            headerKey,
+            res,
+            () =>
+                this.handleSetStatic(
+                    res,
+                    parseInt(guild_id),
+                    static_name,
+                    params
+                )
         );
     }
     async editStatic(req: Request, res: Response) {
@@ -94,11 +100,12 @@ class StaticAPI extends API {
             return;
         }
 
-        const discord_guild_id = await super.getDiscordGuildIdByStatic(
-            staticModel
-        );
-        super.withPermissionCheck(discord_guild_id || '', headerKey, res, () =>
-            this.handleEditStatic(res, staticModel, params)
+        const guild = await super.getGuildByStatic(staticModel);
+        super.withPermissionCheck(
+            guild?.discord_guild_id || '',
+            headerKey,
+            res,
+            () => this.handleEditStatic(res, staticModel, params)
         );
     }
 
@@ -116,11 +123,12 @@ class StaticAPI extends API {
             return;
         }
 
-        const discord_guild_id = await super.getDiscordGuildIdByStatic(
-            staticModel
-        );
-        super.withPermissionCheck(discord_guild_id || '', headerKey, res, () =>
-            this.handleDeleteStatic(res, staticModel)
+        const guild = await super.getGuildByStatic(staticModel);
+        super.withPermissionCheck(
+            guild?.discord_guild_id || '',
+            headerKey,
+            res,
+            () => this.handleDeleteStatic(res, staticModel)
         );
     }
     private handleSetStatic(

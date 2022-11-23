@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 
 import { connect } from '../../database/database';
+import { UserBis } from '../userBis/userBis.model';
 
 const sequelize = connect();
 export class StaticMember extends Model {
@@ -29,21 +30,22 @@ StaticMember.init(
             }
         },
         user_discord_id: {type: DataTypes.STRING, allowNull: false},
-        main_bis_id: {
+        bis_id: {
             type: DataTypes.BIGINT,
             allowNull: true,
             set(value) {
-                this.setDataValue('main_bis_id', value);
+                this.setDataValue('bis_id', value);
             },
             get() {
-                const rawValue = this.getDataValue('main_bis_id');
+                const rawValue = this.getDataValue('bis_id');
                 return rawValue || null;
             }
         }
     },
     {
         sequelize,
-        modelName: 'StaticMember',
-        freezeTableName: true
+        modelName: 'static_member'
     }
 );
+
+StaticMember.hasOne(UserBis, {foreignKey: 'bis_id'});

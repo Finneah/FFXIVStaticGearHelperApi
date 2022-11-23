@@ -65,8 +65,7 @@ Guild.init(
     {
         // Other model options go here
         sequelize, // We need to pass the connection instance
-        modelName: 'Guilds', // We need to choose the model name
-        freezeTableName: true
+        modelName: 'guilds' // We need to choose the model name
     }
 );
 Guild.hasMany(Static, {foreignKey: 'guild_id'});

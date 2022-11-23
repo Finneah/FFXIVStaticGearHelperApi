@@ -15,9 +15,6 @@ class GuildsService {
     }
     async getGuild(guild_id: number): Promise<Guild | null> {
         try {
-            if (!guild_id) {
-                throw 'Missing Guild Id';
-            }
             const guildModel = await Guild.findByPk(guild_id);
 
             return guildModel;
@@ -39,17 +36,20 @@ class GuildsService {
         moderator_role: string
     ): Promise<Guild | null> {
         try {
-            const exist = await this.getGuildByDiscordGuildId(discord_guild_id);
-            if (exist) {
+            const guild = await Guild.findOrCreate({
+                where: {
+                    discord_guild_id
+                },
+                defaults: {discord_guild_id, moderator_role}
+            });
+
+            if (!guild[1]) {
                 throw {
                     code: ErrorCodes.STATIC_EXIST,
                     message: `Server "${discord_guild_id}" existiert bereits.`
                 };
             }
-            return await Guild.create({
-                discord_guild_id,
-                moderator_role
-            });
+            return guild[0];
         } catch (error) {
             return Promise.reject(error);
         }

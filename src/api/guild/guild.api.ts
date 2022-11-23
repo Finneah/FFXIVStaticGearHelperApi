@@ -17,7 +17,7 @@ class GuildAPI extends API {
         const guild_id = req.params.guild_id;
         const headerKey = req.headers.key as unknown as string;
         if (!guild_id) {
-            res.send('Missing Guild Id');
+            super.getError(res, ErrorCodes.MISSING_PARAM, 'Missing Guild Id');
             return;
         }
 
@@ -42,8 +42,8 @@ class GuildAPI extends API {
 
     async setGuild(req: Request, res: Response) {
         const headerKey = req.headers.key as unknown as string;
-        const params = req.query as unknown as GuildParams;
         const discord_guild_id = req.params.discord_guild_id;
+        const params = req.query as unknown as GuildParams;
         const moderator_role = params.moderator_role;
 
         if (!discord_guild_id) {
@@ -70,9 +70,9 @@ class GuildAPI extends API {
 
     async editGuild(req: Request, res: Response) {
         const headerKey = req.headers.key as unknown as string;
-        const params = req.query as unknown as GuildParams;
-        const guild_id = req.params.guild_id;
 
+        const guild_id = req.params.guild_id;
+        const params = req.query as unknown as GuildParams;
         if (!guild_id) {
             super.getError(res, ErrorCodes.MISSING_PARAM, 'Missing Guild Id');
             return;

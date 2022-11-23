@@ -1,25 +1,30 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
-import APIErrorHandler, { ErrorCodes } from '../APIErrorHandler';
+import { API } from '../API';
+import { ErrorCodes } from '../APIErrorHandler';
 import { <%= class_name %>Controller } from './<%= class_name %>.controller';
+import { <%= CLASS_NAME %> } from './<%= class_name %>.model';
+import { <%= CLASS_NAME %>Params } from './<%= class_name %>.types';
 
-class <%= CLASS_NAME %> {
-    declare errorHandler;
+class <%= CLASS_NAME %>API extends API {
     constructor() {
-        this.errorHandler = new APIErrorHandler('<%= CLASS_NAME %>');
+        super('<%= CLASS_NAME %>API');
     }
-    private async handleError(
-        res: Response,
-        errorCode: ErrorCodes,
-        errorMessage: string,
-        errorStatus?: number
-    ) {
-        this.errorHandler.setError(errorCode, errorMessage, errorStatus);
-        this.errorHandler.handleError(res);
-    }
-       async get<%= CLASS_NAME %>s(req: Request, res: Response) {
+    async get<%= CLASS_NAME %>s(res: Response) {
         <%= class_name %>Controller.get<%= CLASS_NAME %>s().then((data) => res.json(data));
+    }
+     async get<%= CLASS_NAME %>Bis(req: Request, res: Response) {
+        const headerKey = req.headers.key as unknown as string;
+    }
+    async set<%= CLASS_NAME %>Bis(req: Request, res: Response) {
+        const headerKey = req.headers.key as unknown as string;
+    }
+    async edit<%= CLASS_NAME %>Bis(req: Request, res: Response) {
+        const headerKey = req.headers.key as unknown as string;
+    }
+    async delete<%= CLASS_NAME %>Bis(req: Request, res: Response) {
+        const headerKey = req.headers.key as unknown as string;
     }
 }
 
-export const <%= class_name %>Api = new <%= CLASS_NAME %>();
+export const <%= class_name %>Api = new <%= CLASS_NAME %>API();

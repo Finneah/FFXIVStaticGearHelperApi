@@ -5,17 +5,17 @@ import { PRIVATE_KEY } from '../config/config';
 import APIErrorHandler, { ErrorCodes } from './APIErrorHandler';
 import { Guild } from './guild/guild.model';
 import { guildsService } from './guild/guild.service';
-import { staticController } from './static/static.controller';
 import { Static } from './static/static.model.ts';
 import { staticService } from './static/static.service';
-import { staticMemberController } from './staticMember/staticMember.controller';
 import { StaticMember } from './staticMember/staticMember.model';
 import { staticMembersService } from './staticMember/staticMember.service';
+import { userBisService } from './userBis/userBis.service';
 
 export class API {
     declare errorHandler;
     constructor(apiName: string) {
         this.errorHandler = new APIErrorHandler(apiName);
+        // this.initialData();
     }
 
     getIsValid(key: string, headerKey: string) {
@@ -46,27 +46,23 @@ export class API {
         return this.handleError(res, errorCode, errorMessage, errorStatus);
     }
 
-    async getDiscordGuildIdByStatic(
-        staticModel: Static
-    ): Promise<string | null> {
+    async getGuildByStatic(staticModel: Static): Promise<Guild | null> {
         const guild = await guildsService.getGuild(staticModel?.guild_id);
-        return guild?.discord_guild_id || null;
+        return guild;
     }
 
-    async getDiscordGuildIdByStaticId(
-        static_id: number
-    ): Promise<string | null> {
+    async getGuildByStaticId(static_id: number): Promise<Guild | null> {
         const staticModel = await staticService.getStatic(static_id);
         if (!staticModel?.guild_id) {
             return null;
         }
         const guild = await guildsService.getGuild(staticModel?.guild_id);
-        return guild?.discord_guild_id || null;
+        return guild || null;
     }
 
-    async getDiscordGuildIdByStaticMemberId(
+    async getGuildByStaticMemberId(
         static_member_id: number
-    ): Promise<string | null> {
+    ): Promise<Guild | null> {
         const staticMember = await staticMembersService.getStaticMemberById(
             static_member_id
         );
@@ -74,15 +70,13 @@ export class API {
             return null;
         }
 
-        const discord_guild_id = await this.getDiscordGuildIdByStaticId(
-            staticMember.static_id
-        );
-        return discord_guild_id;
+        const guild = await this.getGuildByStaticId(staticMember.static_id);
+        return guild || null;
     }
 
-    async getDiscordGuildIdByGuildId(guild_id: number): Promise<string | null> {
+    async getGuildByGuildId(guild_id: number): Promise<Guild | null> {
         const guild = await guildsService.getGuild(guild_id);
-        return guild?.discord_guild_id || null;
+        return guild || null;
     }
 
     async delete(model: StaticMember | Static | Guild) {
@@ -98,7 +92,7 @@ export class API {
         this.errorHandler.setError(errorCode, errorMessage, errorStatus);
         this.errorHandler.handleError(res);
     }
-    private isValid = (key: string, headerKey: string) => {
+    private isValid(key: string, headerKey: string) {
         try {
             const decryptedKey = CryptoJS.HmacSHA256(
                 key,
@@ -110,5 +104,27 @@ export class API {
             console.log('ERROR', error);
             return false;
         }
-    };
+    }
+    private async initialData() {
+        // role 1045010249129676941
+        // guild 1004408026922487838
+        // user 378985901025394688
+        try {
+            await guildsService.setGuild(
+                '1004408026922487838',
+                '1045010249129676941'
+            );
+            await staticService.setStatic(1, 'das etwas', 4);
+            await staticMembersService.setStaticMember(1, '378985901025394688');
+            await userBisService.setUserBis({
+                guild_id: 1,
+                user_discord_id: '378985901025394688',
+                bis_name: 'test',
+                bis_link:
+                    'https://etro.gg/gearset/e78a29e3-1dcf-4e53-bbcf-234f33b2c831'
+            });
+        } catch (error) {
+            console.log('ERROR', error);
+        }
+    }
 }

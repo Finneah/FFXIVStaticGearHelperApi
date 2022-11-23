@@ -95,8 +95,7 @@ Static.init(
     },
     {
         sequelize,
-        modelName: 'Statics',
-        freezeTableName: true
+        modelName: 'statics'
     }
 );
 Static.hasMany(StaticMember, {foreignKey: 'static_id'});
