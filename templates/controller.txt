@@ -1,0 +1,12 @@
+import Logger from '../../utils/logger';
+import { <%= class_name %>Service } from './<%= class_name %>.service';
+
+const logger = Logger.child({module: '<%= CLASS_NAME %>Controller'});
+
+class <%= CLASS_NAME %>Controller {
+    async get<%= CLASS_NAME %>s() {
+        logger.info('Controller: get<%= CLASS_NAME %>s');
+        return await <%= class_name %>Service.get<%= CLASS_NAME %>s();
+    }
+}
+export const <%= class_name %>Controller = new <%= CLASS_NAME %>Controller();

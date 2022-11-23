@@ -1,0 +1,18 @@
+
+import { <%= CLASS_NAME %> } from './<%= class_name %>.model';
+
+class <%= CLASS_NAME %>Service {
+    async sync<%= CLASS_NAME %>s() {
+        await <%= CLASS_NAME %>.sync();
+    }
+    async get<%= CLASS_NAME %>s() {
+        try {
+            const <%= class_name %>s = await <%= CLASS_NAME %>.findAll();
+            return Promise.resolve(<%= class_name %>s);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+}
+
+export const <%= class_name %>Service = new <%= CLASS_NAME %>Service();

@@ -1,8 +1,0 @@
-export enum ErrorCodes {
-    DBADDGUILD,
-    DBGETGUILD,
-    DBEDITGUILD,
-    ETROGETGEARSET,
-    ETROGETMATERIA,
-    ETROGETJOBS
-}

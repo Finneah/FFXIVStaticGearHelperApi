@@ -1,0 +1,16 @@
+import express from 'express';
+
+import { <%= class_name %>Api } from '../<%= class_name %>/<%= class_name %>.api';
+
+const <%= class_name %>sRouter = express.Router();
+
+// <%= class_name %>sRouter.use(function timeLog(req, res, next) {
+//     console.log(res);
+//     next();
+// });
+
+// GET http://localhost:3001/<%= class_name %>s/
+<%= class_name %>sRouter.get('/', (req, res) => <%= class_name %>Api.get<%= CLASS_NAME %>s(req, res));
+
+
+export default <%= class_name %>sRouter;

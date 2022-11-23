@@ -1,4 +1,4 @@
-import { Static } from '../database/gearset/gearset.types';
+import { Static } from '../../database/gearset/gearset.types';
 
 export type BaseGuild = {
     guild_id: number;
@@ -11,7 +11,6 @@ export type BaseGuild = {
 export interface Guild extends BaseGuild {
     statics?: Static[];
 }
-
 export type GuildParams = {
     guild_id?: string;
     discord_guild_id?: string;

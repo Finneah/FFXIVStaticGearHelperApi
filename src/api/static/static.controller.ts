@@ -1,8 +1,7 @@
-import { stringify } from 'querystring';
-
-import { Static } from '../models/Static';
-import { staticService } from '../services/StaticService';
-import Logger from '../utils/logger';
+import Logger from '../../utils/logger';
+import { Static } from './static.model.ts';
+import { staticService } from './static.service';
+import { StaticParams } from './static.types';
 
 const logger = Logger.child({module: 'StaticController'});
 
@@ -15,18 +14,17 @@ class StaticController {
         logger.info('Controller: getStatic');
         return await staticService.getStatic(static_id);
     }
+    async getStaticForMember(static_member_id: number) {
+        logger.info('Controller: getStaticForMember');
+        return await staticService.getStaticForMember(static_member_id);
+    }
     async setStatic(
         guild_id: number,
         static_name: string,
-        params: {
-            overview_message_id?: string;
-            keyword_loot?: string;
-            keyword_buy?: string;
-            members_count?: number;
-            thumbnail?: string;
-        }
+        params: StaticParams
     ) {
         logger.info('Controller: setStatic');
+
         return await staticService.setStatic(
             guild_id,
             static_name,
@@ -36,35 +34,26 @@ class StaticController {
             params.thumbnail
         );
     }
-    async editStatic(
-        static_id: number,
-        params: {
-            static_name?: string;
-            overview_message_id?: string;
-            keyword_loot?: string;
-            keyword_buy?: string;
-            members_count?: string;
-        }
-    ) {
+    async editStatic(staticModel: Static, params: StaticParams) {
         logger.info('Controller: editStatic');
-        const staticModel = await this.getStatic(static_id);
-        if (staticModel && params.static_name) {
+
+        if (params.static_name) {
             staticService.setStaticName(staticModel, params.static_name);
         }
-        if (staticModel && params.overview_message_id) {
+        if (params.overview_message_id) {
             staticService.setOverviewMessageId(
                 staticModel,
                 params.overview_message_id
             );
         }
-        if (staticModel && params.keyword_loot) {
+        if (params.keyword_loot) {
             staticService.setKeywordLoot(staticModel, params.keyword_loot);
         }
-        if (staticModel && params.keyword_buy) {
-            staticService.setKeywordLoot(staticModel, params.keyword_buy);
+        if (params.keyword_buy) {
+            staticService.setKeywordBuy(staticModel, params.keyword_buy);
         }
-        if (staticModel && params.members_count) {
-            staticService.setKeywordLoot(staticModel, params.members_count);
+        if (params.members_count) {
+            staticService.setMembersCount(staticModel, params.members_count);
         }
         return await staticModel;
     }

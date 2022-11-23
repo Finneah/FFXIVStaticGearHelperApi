@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 
-import { connect } from '../database/database';
+import { connect } from '../../database/database';
+import { Static } from '../static/static.model.ts';
 
 const sequelize = connect();
 export class Guild extends Model {
@@ -19,7 +20,7 @@ Guild.init(
             primaryKey: true
         },
         discord_guild_id: {
-            type: DataTypes.CHAR(100),
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             get() {
@@ -28,7 +29,7 @@ Guild.init(
             }
         },
         moderator_role: {
-            type: DataTypes.CHAR(100),
+            type: DataTypes.STRING,
             allowNull: false,
             set(value) {
                 this.setDataValue('moderator_role', value);
@@ -39,7 +40,7 @@ Guild.init(
             }
         },
         best_in_slot_role: {
-            type: DataTypes.CHAR(100),
+            type: DataTypes.STRING,
             allowNull: true,
             set(value) {
                 this.setDataValue('best_in_slot_role', value);
@@ -50,7 +51,7 @@ Guild.init(
             }
         },
         overview_message_id: {
-            type: DataTypes.CHAR(100),
+            type: DataTypes.STRING,
             allowNull: true,
             set(value) {
                 this.setDataValue('overview_message_id', value);
@@ -68,3 +69,4 @@ Guild.init(
         freezeTableName: true
     }
 );
+Guild.hasMany(Static, {foreignKey: 'guild_id'});

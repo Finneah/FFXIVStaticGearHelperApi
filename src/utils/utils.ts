@@ -1,5 +1,3 @@
-import { QueryConfig } from 'pg';
-
 import { Equipment } from '../database/gearset/gearset.types';
 import { SlotNames } from '../models/db.types';
 import { EtroEquipment } from '../models/etro.types';

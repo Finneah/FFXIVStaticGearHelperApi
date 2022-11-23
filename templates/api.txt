@@ -1,0 +1,25 @@
+import { Response } from 'express';
+
+import APIErrorHandler, { ErrorCodes } from '../APIErrorHandler';
+import { <%= class_name %>Controller } from './<%= class_name %>.controller';
+
+class <%= CLASS_NAME %> {
+    declare errorHandler;
+    constructor() {
+        this.errorHandler = new APIErrorHandler('<%= CLASS_NAME %>');
+    }
+    private async handleError(
+        res: Response,
+        errorCode: ErrorCodes,
+        errorMessage: string,
+        errorStatus?: number
+    ) {
+        this.errorHandler.setError(errorCode, errorMessage, errorStatus);
+        this.errorHandler.handleError(res);
+    }
+       async get<%= CLASS_NAME %>s(req: Request, res: Response) {
+        <%= class_name %>Controller.get<%= CLASS_NAME %>s().then((data) => res.json(data));
+    }
+}
+
+export const <%= class_name %>Api = new <%= CLASS_NAME %>();

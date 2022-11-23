@@ -1,0 +1,27 @@
+import { DataTypes, Model } from 'sequelize';
+
+import { connect } from '../../database/database';
+
+const sequelize = connect();
+export class <%= CLASS_NAME %> extends Model {
+    declare <%= class_name %>_id: number;
+   
+}
+
+<%= CLASS_NAME %>.init(
+    {
+        <%= class_name %>_id: {
+            type: DataTypes.BIGINT,
+            autoIncrement: true,
+            primaryKey: true
+        },
+       
+    },
+    {
+        // Other model options go here
+        sequelize, // We need to pass the connection instance
+        modelName: '<%= CLASS_NAME %>s', // We need to choose the model name
+        freezeTableName: true
+    }
+);
+

@@ -1,6 +1,6 @@
-import {QueryConfig} from 'pg';
+import { QueryConfig } from 'pg';
 
-import {DBBis} from '../../../models/db.types';
+import { DBBis } from '../../../models/db.types';
 import Logger from '../../../utils/logger';
 
 const logger = Logger.child({module: 'getBis'});
@@ -53,7 +53,7 @@ export const getBisByUserByName = async (
         // logger.info(`get-BisByUserByName ${JSON.stringify(res?.rows[0])}`);
         // return res?.rows[0] ?? null;
     } catch (error) {
-        return Promise.reject(error);
+        return error;
     }
 };
 
@@ -77,7 +77,7 @@ export const getMainBisAll = async (guild_id: string) => {
         // );
         // return res?.rows ?? null;
     } catch (error) {
-        return Promise.reject(error);
+        return error;
     }
 };
 
@@ -99,6 +99,6 @@ export const getMainBisByUser = async (userId: string, guild_id: string) => {
         // logger.info(`get-MainBisFromUser ${JSON.stringify(res?.rows[0])}`);
         // return res?.rows[0] ?? null;
     } catch (error) {
-        return Promise.reject(error);
+        return error;
     }
 };

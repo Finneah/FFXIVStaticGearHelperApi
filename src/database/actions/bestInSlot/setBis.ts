@@ -1,6 +1,6 @@
-import {QueryConfig} from 'pg';
+import { QueryConfig } from 'pg';
 
-import {DBBis} from '../../../models/db.types';
+import { DBBis } from '../../../models/db.types';
 import Logger from '../../../utils/logger';
 
 const logger = Logger.child({module: 'setBisForUser'});
@@ -90,7 +90,7 @@ export const setMainBisGearByUser = async (
         // logger.info(`set-MainBisGearByUser ${JSON.stringify(res?.rows[0])}`);
         // return res?.rows[0] ?? null;
     } catch (error) {
-        return Promise.reject(error);
+        return error;
     }
 };
 

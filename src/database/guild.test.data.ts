@@ -1,5 +1,5 @@
-import {DBBis} from '../../models/db.types';
-import {Guild} from '../../types/guild.types';
+import { Guild } from '../api/guild/guild.types';
+import { DBBis } from '../models/db.types';
 
 export const guildsMock: Guild[] = [
     {

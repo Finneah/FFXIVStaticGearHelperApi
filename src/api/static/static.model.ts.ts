@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 
-import { connect } from '../database/database';
-import { Guild } from './Guilds';
+import { connect } from '../../database/database';
+import { StaticMember } from '../staticMember/staticMember.model';
 
 const sequelize = connect();
 export class Static extends Model {
@@ -27,7 +27,7 @@ Static.init(
             allowNull: false
         },
         static_name: {
-            type: DataTypes.CHAR(30),
+            type: DataTypes.STRING,
             allowNull: false,
             set(value) {
                 this.setDataValue('static_name', value);
@@ -38,7 +38,7 @@ Static.init(
             }
         },
         overview_message_id: {
-            type: DataTypes.CHAR(100),
+            type: DataTypes.STRING,
             allowNull: true,
             set(value) {
                 this.setDataValue('overview_message_id', value);
@@ -49,7 +49,7 @@ Static.init(
             }
         },
         keyword_loot: {
-            type: DataTypes.CHAR(20),
+            type: DataTypes.STRING,
             allowNull: true,
             set(value) {
                 this.setDataValue('keyword_loot', value);
@@ -60,7 +60,7 @@ Static.init(
             }
         },
         keyword_buy: {
-            type: DataTypes.CHAR(20),
+            type: DataTypes.STRING,
             allowNull: true,
             set(value) {
                 this.setDataValue('keyword_buy', value);
@@ -82,7 +82,7 @@ Static.init(
             }
         },
         thumbnail: {
-            type: DataTypes.CHAR(256),
+            type: DataTypes.STRING,
             allowNull: true,
             set(value) {
                 this.setDataValue('thumbnail', value);
@@ -94,11 +94,9 @@ Static.init(
         }
     },
     {
-        // Other model options go here
-        sequelize, // We need to pass the connection instance
-        modelName: 'Statics', // We need to choose the model name
+        sequelize,
+        modelName: 'Statics',
         freezeTableName: true
     }
 );
-
-Static.hasMany(Guild, {foreignKey: 'guild_id'});
+Static.hasMany(StaticMember, {foreignKey: 'static_id'});
